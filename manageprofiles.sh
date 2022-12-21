@@ -55,8 +55,8 @@ function usage(){
 
       - list                    zeigt alle definierten Liberty Server an
       - create NAME [OFFSET]    legt einen neuen Liberty Server mit Namen und Port ${WLP_BASE_PORT_HTTP} + OFFSET (std: 0) an
-      - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nachzufragen!
-      - run    NAME  46           starten den Liberty 0) anr im Vordergrund (Strg-C um abzubrechen!)S
+      - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nach zu fragen!
+      - run    NAME             starten den Liberty Server im Vordergrund. Strg-C um abzubrechen!
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
 
