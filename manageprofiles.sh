@@ -237,7 +237,7 @@ EOM
     # Generate self signed TLS certificate & key in P12 keytstore
     ${JAVA_HOME}/bin/keytool -genkeypair  -keyalg RSA -keysize 4096 -sigalg SHA256withRSA  -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12" -dname "CN=${WLP_SERVER_NAME}-$(hostname)" -validity 3650 -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
 
-    ${JAVA_HOME}/bin/keytool -exportcert -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12" -file "/dev/shm/${WLP_SERVER_NAME}.cer" -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
+    ${JAVA_HOME}/bin/keytool -exportcert -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12" -file "/tmp/${WLP_SERVER_NAME}.cer" -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
 
 
 elif [ "${ACTION}" = "delete" ]; then
