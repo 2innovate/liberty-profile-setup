@@ -243,7 +243,7 @@ EOM
 
 elif [ "${ACTION}" = "delete" ]; then
     WLP_SERVER_NAME=${2?ERROR: Arg1: Kein SERVERNAME angegeben.}
-    CONFIRM=${3}
+    CONFIRM=${3:-yes}
     WLP_SERVER_DIR=$WLP_USER_DIR/servers/$WLP_SERVER_NAME
     if [ ! -d "$WLP_SERVER_DIR" ]; then
         echo "ERROR: DELETE: Das Server-Root Verzeichnis '$WLP_SERVER_DIR' existiert nicht!"
