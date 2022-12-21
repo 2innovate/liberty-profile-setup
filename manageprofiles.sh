@@ -12,8 +12,8 @@ export WLP_LOG_ROOT=/opt/liberty/logs
 export WLP_PROFILE_ROOT=/opt/liberty/profiles
 export WLP_JAVA_ROOT=/opt/liberty/java
 
-WLP_BASE_PORT_HTTP=10080
-WLP_BASE_PORT_HTTPS=10443
+WLP_BASE_PORT_HTTP=9080
+WLP_BASE_PORT_HTTPS=9443
 
 #
 # ================================================================================
