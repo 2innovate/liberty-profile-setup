@@ -1,0 +1,27 @@
+[Unit]
+Description=WebSphere Liberty Application Server - %I
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+
+User=thikade
+Group=thikade
+
+Type=forking
+
+EnvironmentFile=/opt/liberty/profiles/wlp/servers/%I/server.env
+
+ExecStart=/opt/liberty/bin/liberty-exec.sh start %I
+ExecStop=/opt/liberty/bin/liberty-exec.sh stop %I
+
+PIDFile=/opt/liberty/logs/wlp/.pid/%I.pid
+
+# Allow a minute for ExecStop before systemd sends SIGTERM
+TimeoutStopSec=60
+
+# JVM returns 143 after being killed with SIGTERM
+SuccessExitStatus=143
+
+[Install]
+WantedBy=default.target

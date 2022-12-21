@@ -1,0 +1,6 @@
+wlp-*
+downloads/*zip
+downloads/*tar.gz
+logs/*
+java/*
+profiles/*
