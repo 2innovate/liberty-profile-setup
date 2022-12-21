@@ -56,7 +56,7 @@ function usage(){
       - list                    zeigt alle definierten Liberty Server an
       - create NAME [OFFSET]    legt einen neuen Liberty Server mit Namen und Port ${WLP_BASE_PORT_HTTP} + OFFSET (std: 0) an
       - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nachzufragen!
-      - run    NAME             starten den Liberty 0) anr im Vordergrund (Strg-C um abzubrechen!)S
+      - run    NAME  46           starten den Liberty 0) anr im Vordergrund (Strg-C um abzubrechen!)S
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
 
@@ -243,13 +243,13 @@ EOM
 
 elif [ "${ACTION}" = "delete" ]; then
     WLP_SERVER_NAME=${2?ERROR: Arg1: Kein SERVERNAME angegeben.}
-    CONFIRM=${3,,}
+    CONFIRM=${3}
     WLP_SERVER_DIR=$WLP_USER_DIR/servers/$WLP_SERVER_NAME
     if [ ! -d "$WLP_SERVER_DIR" ]; then
         echo "ERROR: DELETE: Das Server-Root Verzeichnis '$WLP_SERVER_DIR' existiert nicht!"
         exit 2
     fi
-    if [ "${CONFIRM}" != "-f" ]; then
+    if [ "${CONFIRM,,}" != "-f" ]; then
         echo -e "\nPress any key to delete '$WLP_SERVER_DIR' now, or Ctrl-C to abort ..."
         read key
     fi
