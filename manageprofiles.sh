@@ -111,6 +111,7 @@ if [ "${ACTION}" = "create" ]; then
 
             Server.Root:  $WLP_SERVER_DIR
             Log.Root   :  $WLP_OUTPUT_DIR/$WLP_SERVER_NAME
+            Web.Ports  :  $((WLP_BASE_PORT_HTTP + WLP_PORT_OFFSET)) / $((WLP_BASE_PORT_HTTPS + WLP_PORT_OFFSET))
 
             server.cmd  :  $WLP_SERVER_CMD
 
