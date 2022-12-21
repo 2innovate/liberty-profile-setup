@@ -47,3 +47,17 @@ $ ./manageprofiles.sh
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
 ```
+
+## create 2 server instances
+```
+./manageprofiles.sh create server1
+./manageprofiles.sh create server2 1
+```
+
+# Start/stop servers using systemd
+Copy service file `liberty/bin/liberty@.service` to /etc/systemd/system
+```
+sudo cp bin/liberty@.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl status liberty@server1
+```
