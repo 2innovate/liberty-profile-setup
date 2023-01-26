@@ -129,6 +129,8 @@ EOM
     <server description="main server config. Will be merged with /configDropins/**/">
         <featureManager>
             <feature>jakartaee-9.1</feature>
+            <feature>monitor-1.0</feature>
+            <feature>mpMetrics-4.0</feature>
         </featureManager>
 
         <!-- Automatically expand WAR files and EAR files -->
