@@ -1,39 +1,8 @@
 #!/bin/bash -eu
 
-# ================================================================================
-# Customize here as required
-
-export WLP_VERSION=22.0.0.12
-export WLP_EDITION=wlp-base-all
-export WLP_JDK_VERSION=jdk-17.0.5+8
-
-export WLP_BIN_ROOT=/opt/liberty
-export WLP_LOG_ROOT=/opt/liberty/logs
-export WLP_PROFILE_ROOT=/opt/liberty/profiles
-export WLP_JAVA_ROOT=/opt/liberty/java
-
-WLP_BASE_PORT_HTTP=9080
-WLP_BASE_PORT_HTTPS=9443
-
-#
-# ================================================================================
-#
-
-export WLP_BIN_DIR=${WLP_BIN_ROOT}/${WLP_EDITION}-${WLP_VERSION}
-export WLP_SERVER_CMD_PATH=${WLP_BIN_DIR}/wlp/bin
-export WLP_SERVER_CMD=${WLP_SERVER_CMD_PATH}/server
-
-
-export JAVA_HOME=$WLP_JAVA_ROOT/$WLP_JDK_VERSION
-
-# use a single profile-dir 'wlp' for multiple JVMs (servers)
-export WLP_PROFILE_NAME=wlp
-export WLP_USER_DIR=$WLP_PROFILE_ROOT/$WLP_PROFILE_NAME
-export WLP_OUTPUT_DIR=$WLP_LOG_ROOT/$WLP_PROFILE_NAME
-
-# for AES encrypred secrets
-WLP_AES_KEY_FILE_NAME=aesKey.properties
-WLP_AES_KEY_FILE=${WLP_USER_DIR}/shared/resources/security/$WLP_AES_KEY_FILE_NAME
+##
+## Soure customizations
+. $(dirname ${0})/liberty_settings.sh
 
 
 #
