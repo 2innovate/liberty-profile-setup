@@ -124,8 +124,8 @@ function setMode {
         find . -type d ! -perm "${__mode}" -exec chmod "${__mode}" {} \;
         ##
         ## If we have a filemode for the files in the directory
-        if ! test -z "${__filemode+x}" ; then
-            find . -type f ! -perm "${__filemode}" -exec chmod "${__mode}" {} \;
+        if ! test -z "${__filemode}" ; then
+            find . -type f ! -perm "${__filemode}" -exec chmod "${__filemode}" {} \;
         fi
     fi
 
@@ -282,6 +282,7 @@ function deployersReadAccess {
     local __deployersReadDirs=("${WLP_USER_DIR}/shared/apps" "${WLP_USER_DIR}/shared/config")
     for __x in ${__deployersReadDirs[@]}; do
         setOwner "${WLP_BIN_USER}" "${WLP_DEPLOY_GROUP}" "${__x}" "recursive"
+        chmod g+s ${__x}
         setMode ${__x} ${__mode} ${__fileMode}
         echo "Set read access for deployers group on \"${__x}\" ..."
     done
