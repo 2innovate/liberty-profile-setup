@@ -31,11 +31,7 @@ EOM
 # CONFIGURATION OVERRIDE Inlcude the federated repository
 cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/ltpa.xml
 <server description="Ltpa sefinition">
-    <ltpa keysFileName="${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}ALoerrEsXW40OpY2Cntrxb18WRvlh05856JdO2YmAsmI" expiration="120" authFilterRef="myAuthFilter"/>
-
-    <authFilter id="servletSampleFilter">
-        <webApp id="ServletSample" name="ServletSample" matchType="contains"/>
-    </authFilter>
+    <ltpa keysFileName="${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}ALoerrEsXW40OpY2Cntrxb18WRvlh05856JdO2YmAsmI" expiration="120" />
 </server>
 EOM
 
