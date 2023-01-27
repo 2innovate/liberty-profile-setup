@@ -56,7 +56,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     <ldapRegistry host="epyc.2i.at"
     	baseDN="dc=pva,dc=2i,dc=at" port="10389" ldapType="Custom"
     	id="OpenLDAP_PVA"
-    	bindDN="cn=02attidm,cn=Users,dc=pva,dc=sozvers,dc=at"
+    	bindDN="cn=admin,dc=pva,dc=2i,dc=at"
     	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
@@ -68,7 +68,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<searchResultsCache enabled="false" size="2000" timeout="20m" resultsSizeLimit="2000"></searchResultsCache>
     	</ldapCache>
     	<ldapEntityType name="Group" id="pvaGroup">
-    		<searchBase>cn=Roles,dc=pva,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=groups,ou=ocp00,dc=pva,dc=2i,dc=at</searchBase>
     		<objectClass>pvaGroup</objectClass>
     		<objectClass>posixGroup</objectClass>
     		<objectClass>groupOfUniqueNames</objectClass>
@@ -84,7 +84,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<objectClass>organizationalPerson</objectClass>
     		<objectClass>pvaMitarbeiter</objectClass>
     		<objectClass>inetOrgPerson</objectClass>
-    		<searchBase>cn=Users,dc=pva,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=users,ou=ocp00,dc=pva,dc=2i,dc=at</searchBase>
 			<searchFilter>(|(uid=02*)(pvaTechnischerBenutzer=true))</searchFilter>
     	</ldapEntityType>
     	<groupProperties>
@@ -93,10 +93,10 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	</groupProperties>
     </ldapRegistry>
 
-    <ldapRegistry host="ldapisimtt.pva.sozvers.at"
-    	baseDN="dc=sva,dc=sozvers,dc=at" port="10389" ldapType="Custom"
+    <ldapRegistry host="epyc.2i.at"
+    	baseDN="dc=sva,dc=2i,dc=at" port="10390" ldapType="Custom"
     	id="OpenLDAP_SVA"
-    	bindDN="cn=02attidm,cn=Users,dc=pva,dc=sozvers,dc=at"
+    	bindDN="cn=admin,dc=sva,dc=2i,dc=at"
     	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
@@ -108,7 +108,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<searchResultsCache enabled="false" size="2000" timeout="20m" resultsSizeLimit="2000"></searchResultsCache>
     	</ldapCache>
     	<ldapEntityType name="Group" id="svaGroup">
-    		<searchBase>cn=Roles,dc=sva,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=groups,ou=ocp00,dc=sva,dc=2i,dc=at</searchBase>
     		<objectClass>pvaGroup</objectClass>
     		<objectClass>posixGroup</objectClass>
     		<objectClass>groupOfUniqueNames</objectClass>
@@ -125,7 +125,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<objectClass>user</objectClass>
     		<objectClass>pvaMitarbeiter</objectClass>
     		<objectClass>inetOrgPerson</objectClass>
-    		<searchBase>cn=Users,dc=sva,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=users,ou=ocp00,dc=sva,dc=2i,dc=at</searchBase>
 			<searchFilter>(uid=40*)</searchFilter>
     	</ldapEntityType>
     	<groupProperties>
@@ -134,10 +134,10 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	</groupProperties>
     </ldapRegistry>
 
-    <ldapRegistry host="ldapisimtt.pva.sozvers.at"
-    	baseDN="dc=svb,dc=sozvers,dc=at" port="10389" ldapType="Custom"
+    <ldapRegistry host="epyc.2i.at"
+    	baseDN="dc=svb,dc=2i,dc=at" port="10391" ldapType="Custom"
     	id="OpenLDAP_SVB"
-    	bindDN="cn=02attidm,cn=Users,dc=pva,dc=sozvers,dc=at"
+    	bindDN="cn=admin,dc=svb,dc=2i,dc=at"
     	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
@@ -149,7 +149,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<searchResultsCache enabled="false" size="2000" timeout="20m" resultsSizeLimit="2000"></searchResultsCache>
     	</ldapCache>
     	<ldapEntityType name="Group" id="svbGroup">
-    		<searchBase>cn=Roles,dc=svb,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=groups,ou=ocp00,dc=svb,dc=2i,dc=at</searchBase>
     		<objectClass>pvaGroup</objectClass>
     		<objectClass>posixGroup</objectClass>
     		<objectClass>groupOfUniqueNames</objectClass>
@@ -166,7 +166,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<objectClass>user</objectClass>
     		<objectClass>pvaMitarbeiter</objectClass>
     		<objectClass>inetOrgPerson</objectClass>
-    		<searchBase>cn=Users,dc=svb,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=users,ou=ocp00,dc=svb,dc=2i,dc=at</searchBase>
 			<searchFilter>(uid=50*)</searchFilter>
     	</ldapEntityType>
     	<groupProperties>
@@ -175,10 +175,10 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
 		</groupProperties>
     </ldapRegistry>
 
-    <ldapRegistry host="ldapisimtt.pva.sozvers.at"
-    	baseDN="dc=vaeb,dc=sozvers,dc=at" port="10389" ldapType="Custom"
+    <ldapRegistry host="epyc.2i.at"
+    	baseDN="dc=vaeb,dc=2i,dc=at" port="10392" ldapType="Custom"
     	id="OpenLDAP_VAEB"
-    	bindDN="cn=02attidm,cn=Users,dc=pva,dc=sozvers,dc=at"
+    	bindDN="cn=admin,dc=vaeb,dc=2i,dc=at"
     	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
@@ -190,7 +190,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<searchResultsCache enabled="false" size="2000" timeout="20m" resultsSizeLimit="2000"></searchResultsCache>
     	</ldapCache>
     	<ldapEntityType name="Group" id="vaebGroup">
-    		<searchBase>cn=Roles,dc=vaeb,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=groups,ou=ocp00,dc=vaeb,dc=2i,dc=at</searchBase>
     		<objectClass>pvaGroup</objectClass>
     		<objectClass>posixGroup</objectClass>
     		<objectClass>groupOfUniqueNames</objectClass>
@@ -207,7 +207,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<objectClass>user</objectClass>
     		<objectClass>pvaMitarbeiter</objectClass>
     		<objectClass>inetOrgPerson</objectClass>
-    		<searchBase>cn=Users,dc=vaeb,dc=sozvers,dc=at</searchBase>
+    		<searchBase>ou=users,ou=ocp00,dc=vaeb,dc=2i,dc=at</searchBase>
 			<searchFilter>(uid=05*)</searchFilter>
     	</ldapEntityType>
     	<groupProperties>
@@ -216,13 +216,12 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
 		</groupProperties>
     </ldapRegistry>
 
-    <federatedRepository maxSearchResults="4500" searchTimeout="10m"
-    	pageCacheSize="1000" pageCacheTimeout="15m" id="PVASecurityFederatedRepository">
-		<primaryRealm name="defaultWIMFileBasedRealm" id="PVAPrimary" allowOpIfRepoDown="true">
-            <participatingBaseEntry name="dc=pva,dc=sozvers,dc=at"/>
-            <participatingBaseEntry name="dc=sva,dc=sozvers,dc=at"/>
-            <participatingBaseEntry name="dc=svb,dc=sozvers,dc=at"/>
-            <participatingBaseEntry name="dc=vaeb,dc=sozvers,dc=at"/>
+    <federatedRepository maxSearchResults="4500" searchTimeout="10m" pageCacheSize="1000" pageCacheTimeout="15m" id="PVASecurityFederatedRepository">
+        <primaryRealm name="defaultWIMFileBasedRealm" id="PVAPrimary" allowOpIfRepoDown="true">
+            <participatingBaseEntry name="dc=pva,dc=2i,dc=at"/>
+            <participatingBaseEntry name="dc=sva,dc=2i,dc=at"/>
+            <participatingBaseEntry name="dc=svb,dc=2i,dc=at"/>
+            <participatingBaseEntry name="dc=vaeb,dc=2i,dc=at"/>
         </primaryRealm>
     	<realm name="defaultWIMFileBasedRealm" id="PVASecurity" allowOpIfRepoDown="true" delimiter="/">
     		<groupDisplayNameMapping inputProperty="cn" outputProperty="cn" />
@@ -231,10 +230,10 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     		<userDisplayNameMapping inputProperty="principalName" outputProperty="principalName" />
     		<userSecurityNameMapping inputProperty="principalName" outputProperty="principalName" />
     		<uniqueUserIdMapping inputProperty="uniqueName" outputProperty="uniqueName" />
-    		<participatingBaseEntry name="dc=vaeb,dc=sozvers,dc=at" id="vaeb" />
-    		<participatingBaseEntry name="dc=svb,dc=sozvers,dc=at" id="svb" />
-    		<participatingBaseEntry name="dc=sva,dc=sozvers,dc=at" id="sva" />
-    		<participatingBaseEntry name="dc=pva,dc=sozvers,dc=at" id="pva" />
+    		<participatingBaseEntry  name="dc=vaeb,dc=2i,dc=at" id="vaeb" />
+    		<participatingBaseEntry  name="dc=svb,dc=2i,dc=at"  id="svb" />
+    		<participatingBaseEntry  name="dc=sva,dc=2i,dc=at"  id="sva" />
+    		<participatingBaseEntry  name="dc=pva,dc=2i,dc=at"  id="pva" />
     	</realm>
     	<supportedEntityType id="groupMappingReference">
     		<name>Group</name>
