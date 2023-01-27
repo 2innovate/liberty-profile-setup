@@ -9,9 +9,8 @@
  * Contributors:
  *     IBM Corporation - Initial implementation
  *******************************************************************************/
-// end::copyright[]
-package io.openliberty.guides.hello;
 
+// end::copyright[]
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,14 +24,13 @@ import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.ServletSecurity;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.sql.Statement;
 // import javax.annotation.Resource;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+// import java.sql.ResultSet;
+// import javax.naming.InitialContext;
+// import javax.naming.NamingException;
 
 @WebServlet(urlPatterns = "/servlet")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = { "user",
