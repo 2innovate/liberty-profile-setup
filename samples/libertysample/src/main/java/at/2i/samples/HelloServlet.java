@@ -51,11 +51,13 @@ public class HelloServlet extends HttpServlet {
 
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
-            out.append("Hello! How are you today?\n");
             out.println("<H1>Hello World Liberty</H1>\n");
+            out.println("Hello! How are you today?\n");
             try {
                 con = ds1.getConnection();
+                out.println("<p>Got a connection\n");
                 stmt = con.createStatement();
+                out.println("<p>Got a statement\n");
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
