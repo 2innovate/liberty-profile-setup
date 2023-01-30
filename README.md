@@ -15,6 +15,7 @@ sudo usermod -a -G libdeploy liberty
 sudo usermod -a -G libdeploy libdev
 sudo mkdir /opt/liberty
 sudo chown -R liberty:liberty /opt/liberty
+sudo loginctl enable-linger liberty
 ```
 **Note**: To create the prerequisites in an automated fashion you can clone the repo (run: `git clone https://github.com/2innovate/liberty-profile-setup`) as root or any user who can become root via sudo and then run: `./rootTasks.sh prereqs` as root (or by running `sudo ./rootTasks.sh prereqs` if you are not root)
 
@@ -107,11 +108,11 @@ $ ./manageprofiles.sh
 
       - list                    zeigt alle definierten Liberty Server an
       - create NAME [OFFSET]    legt einen neuen Liberty Server mit Namen und Port 10080 + OFFSET (std: 0) an
+      - systemd NAME            erstellt ein --user systemd service für server NAME
+      - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nach zu fragen!
       - run    NAME             starten den Liberty 0) anr im Vordergrund (Strg-C um abzubrechen!)S
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
-      - harden                  setzt Gruppenberechtigungen und die Berechtigungen am Filesystem (benötigt root)
-      - prereqs                 erstellt die pre-requisites am Server (benötigt root)
 ```
 
 ## create 2 server instances

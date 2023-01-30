@@ -107,7 +107,7 @@ function setMode {
     if [[ $# -eq 3 ]] ; then
         __filemode=${3}
     else
-        unset __filemode
+        __filemode=""
     fi
 
     test -z "${__mode}" && echo "ERROR: An die Funktion ${0} wurde file mode übergeben" && exit 105
@@ -124,7 +124,8 @@ function setMode {
         find . -type d ! -perm "${__mode}" -exec chmod "${__mode}" {} \;
         ##
         ## If we have a filemode for the files in the directory
-        if ! test -z "${__filemode}" ; then
+        if [[ "${__filemode}." != "." ]] ; then
+            echo "Setting filemode \"${__filemode}\" on \"${__fsObject}\" ..."
             find . -type f ! -perm "${__filemode}" -exec chmod "${__filemode}" {} \;
         fi
     fi
@@ -366,9 +367,19 @@ function hardenInstallation {
 }
 
 function checkSetup {
-    test ! -d "$JAVA_HOME"      && echo -e "ERROR: Java Home existiert nicht: '$JAVA_HOME'" && exit 1
-    test ! -d "$WLP_BIN_DIR"    && echo -e "ERROR: Liberty Verzeichnis existiert nicht: '$WLP_BIN_DIR'" && exit 1
-    test ! -f "$WLP_SERVER_CMD" && echo -e "ERROR: Liberty Server Command nicht gefunden: '$WLP_SERVER_CMD'" && exit 1
+    test ! -d "$JAVA_HOME"      && {
+        echo -e "ERROR: Java Home existiert nicht: '$JAVA_HOME'"
+        exit 1
+    }
+    test ! -d "$WLP_BIN_DIR"    && {
+        echo -e "ERROR: Liberty Verzeichnis existiert nicht: '$WLP_BIN_DIR'"
+        exit 1
+    }
+    test ! -f "$WLP_SERVER_CMD" && {
+        echo -e "ERROR: Liberty Server Command nicht gefunden: '$WLP_SERVER_CMD'"
+        exit 1
+    }
+    return 0
 }
 #
 # ================================================================================

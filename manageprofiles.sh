@@ -24,12 +24,44 @@ function usage(){
 
       - list                    zeigt alle definierten Liberty Server an
       - create NAME [OFFSET]    legt einen neuen Liberty Server mit Namen und Port ${WLP_BASE_PORT_HTTP} + OFFSET (std: 0) an
+      - systemd NAME            erstellt ein --user systemd service für server NAME
       - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nach zu fragen!
       - run    NAME             starten den Liberty Server im Vordergrund. Strg-C um abzubrechen!
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
 
 EOT
+}
+
+function createSystemdService {
+    local __server=${1}
+
+    test -z "${__server}" && echo "ERROR: An die Funktion ${0} wurde keine Servername übergeben" && exit 107
+
+    __servers=$($WLP_SERVER_CMD list | sed -ne '/^The following servers are defined/,$p' | tail -n+3)
+    echo ${__servers} | grep ${__server} 2>1 >/dev/null || {
+        echo "ERROR: Servername \"${__server}\" existiert nicht in diesem Profil!"
+        exit 107
+    }
+    ##
+    ## Enable user-space systemctl to start at boot timt
+    loginctl enable-linger $(id -un)
+    touch ~/.bashrc
+    grep XDG_RUNTIME_DIR ~/.bashrc 2>/dev/null || echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> ~/.bashrc
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    ##
+    ## Copy systemd file
+    mkdir -p ~/.config/systemd/user
+    cp bin/liberty@.service ~/.config/systemd/user || {
+        echo "ERROR: Failed to copy liberty@.service to /etc/systemd/system"
+        exit 107
+    }
+    sed -i  '/User=/d' ~/.config/systemd/user/liberty@.service
+    sed -i  '/Group=/d' ~/.config/systemd/user/liberty@.service
+    systemctl --user daemon-reload
+    systemctl --user status liberty@${__server}
+
+    echo "systemctl service liberty@${__server} installed"
 }
 #
 # ================================================================================
@@ -147,6 +179,9 @@ EOM
                 logFormat='%h %u %{t}W "%r" %s %b %D' >
             </accessLogging>
         </httpEndpoint>
+
+        <!-- Disable security for metrics -->
+        <mpMetrics authentication="false"/>
     </server>
 EOM
 
@@ -234,6 +269,9 @@ elif [[ "${ACTION}" =~ ^run|^status$ ]]; then
     WLP_SERVER_DIR=$WLP_USER_DIR/servers/$WLP_SERVER_NAME
     $WLP_SERVER_CMD $ACTION $WLP_SERVER_NAME
 
+elif [[ "${ACTION}" == "systemd" ]]; then
+    WLP_SERVER_NAME=${2?ERROR: Arg1: Kein SERVERNAME angegeben.}
+    createSystemdService "${WLP_SERVER_NAME}"
 
 elif [[ "${ACTION}" = "status-all" ]]; then
     servers=$($WLP_SERVER_CMD list | sed -ne '/^The following servers are defined/,$p' | tail -n+3)
