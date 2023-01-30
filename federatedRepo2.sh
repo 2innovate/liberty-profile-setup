@@ -31,7 +31,7 @@ EOM
 # CONFIGURATION OVERRIDE Inlcude the federated repository
 cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/ltpa.xml
 <server description="Ltpa sefinition">
-    <ltpa keysFileName="${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}ALoerrEsXW40OpY2Cntrxb18WRvlh05856JdO2YmAsmI" expiration="120" />
+    <ltpa keysFileName="${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}AHa7MuslI2HJ4ZC+q65xYzKmWGFfsi3W3GGf3h3T+8Ar" expiration="120" />
 </server>
 EOM
 
@@ -53,7 +53,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	baseDN="dc=pva,dc=2i,dc=at" port="10389" ldapType="Custom"
     	id="OpenLDAP_PVA"
     	bindDN="cn=admin,dc=pva,dc=2i,dc=at"
-    	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
+    	bindPassword="{aes}AHa7MuslI2HJ4ZC+q65xYzKmWGFfsi3W3GGf3h3T+8Ar"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
     	primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
@@ -93,7 +93,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	baseDN="dc=sva,dc=2i,dc=at" port="10390" ldapType="Custom"
     	id="OpenLDAP_SVA"
     	bindDN="cn=admin,dc=sva,dc=2i,dc=at"
-    	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
+    	bindPassword="{aes}AHa7MuslI2HJ4ZC+q65xYzKmWGFfsi3W3GGf3h3T+8Ar"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
     	primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
@@ -134,7 +134,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	baseDN="dc=svb,dc=2i,dc=at" port="10391" ldapType="Custom"
     	id="OpenLDAP_SVB"
     	bindDN="cn=admin,dc=svb,dc=2i,dc=at"
-    	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
+    	bindPassword="{aes}AHa7MuslI2HJ4ZC+q65xYzKmWGFfsi3W3GGf3h3T+8Ar"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
     	primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
@@ -175,7 +175,7 @@ cat << "EOM" > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     	baseDN="dc=vaeb,dc=2i,dc=at" port="10392" ldapType="Custom"
     	id="OpenLDAP_VAEB"
     	bindDN="cn=admin,dc=vaeb,dc=2i,dc=at"
-    	bindPassword="{aes}AISP+7C2S0ZAxaqk7zfyUGH4Flt/Hv9kreNqwnyyWsW9"
+    	bindPassword="{aes}AHa7MuslI2HJ4ZC+q65xYzKmWGFfsi3W3GGf3h3T+8Ar"
     	ignoreCase="true" reuseConnection="true" recursiveSearch="true"
     	searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
     	primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
