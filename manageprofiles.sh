@@ -1,39 +1,8 @@
 #!/bin/bash -eu
 
-# ================================================================================
-# Customize here as required
-
-export WLP_VERSION=22.0.0.12
-export WLP_EDITION=wlp-base-all
-export WLP_JDK_VERSION=jdk-17.0.5+8
-
-export WLP_BIN_ROOT=/opt/liberty
-export WLP_LOG_ROOT=/opt/liberty/logs
-export WLP_PROFILE_ROOT=/opt/liberty/profiles
-export WLP_JAVA_ROOT=/opt/liberty/java
-
-WLP_BASE_PORT_HTTP=9080
-WLP_BASE_PORT_HTTPS=9443
-
-#
-# ================================================================================
-#
-
-export WLP_BIN_DIR=${WLP_BIN_ROOT}/${WLP_EDITION}-${WLP_VERSION}
-export WLP_SERVER_CMD_PATH=${WLP_BIN_DIR}/wlp/bin
-export WLP_SERVER_CMD=${WLP_SERVER_CMD_PATH}/server
-
-
-export JAVA_HOME=$WLP_JAVA_ROOT/$WLP_JDK_VERSION
-
-# use a single profile-dir 'wlp' for multiple JVMs (servers)
-export WLP_PROFILE_NAME=wlp
-export WLP_USER_DIR=$WLP_PROFILE_ROOT/$WLP_PROFILE_NAME
-export WLP_OUTPUT_DIR=$WLP_LOG_ROOT/$WLP_PROFILE_NAME
-
-# for AES encrypred secrets
-WLP_AES_KEY_FILE_NAME=aesKey.properties
-WLP_AES_KEY_FILE=${WLP_USER_DIR}/shared/resources/security/$WLP_AES_KEY_FILE_NAME
+##
+## Soure customizations
+. $(dirname ${0})/liberty_settings.sh
 
 
 #
@@ -55,12 +24,44 @@ function usage(){
 
       - list                    zeigt alle definierten Liberty Server an
       - create NAME [OFFSET]    legt einen neuen Liberty Server mit Namen und Port ${WLP_BASE_PORT_HTTP} + OFFSET (std: 0) an
+      - systemd NAME            erstellt ein --user systemd service für server NAME
       - delete NAME [-f]        loescht den genannten Liberty Server (inkl Logs). '-f ' loescht ohne nach zu fragen!
       - run    NAME             starten den Liberty Server im Vordergrund. Strg-C um abzubrechen!
       - status NAME             zeigt den Serverstatus eines Servers an
       - status-all              zeigt den Serverstatus aller Liberty Server an
 
 EOT
+}
+
+function createSystemdService {
+    local __server=${1}
+
+    test -z "${__server}" && echo "ERROR: An die Funktion ${0} wurde keine Servername übergeben" && exit 107
+
+    __servers=$($WLP_SERVER_CMD list | sed -ne '/^The following servers are defined/,$p' | tail -n+3)
+    echo ${__servers} | grep ${__server} 2>1 >/dev/null || {
+        echo "ERROR: Servername \"${__server}\" existiert nicht in diesem Profil!"
+        exit 107
+    }
+    ##
+    ## Enable user-space systemctl to start at boot timt
+    loginctl enable-linger $(id -un)
+    touch ~/.bashrc
+    grep XDG_RUNTIME_DIR ~/.bashrc 2>/dev/null || echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> ~/.bashrc
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    ##
+    ## Copy systemd file
+    mkdir -p ~/.config/systemd/user
+    cp bin/liberty@.service ~/.config/systemd/user || {
+        echo "ERROR: Failed to copy liberty@.service to /etc/systemd/system"
+        exit 107
+    }
+    sed -i  '/User=/d' ~/.config/systemd/user/liberty@.service
+    sed -i  '/Group=/d' ~/.config/systemd/user/liberty@.service
+    systemctl --user daemon-reload
+    systemctl --user status liberty@${__server}
+
+    echo "systemctl service liberty@${__server} installed"
 }
 #
 # ================================================================================
@@ -160,6 +161,8 @@ EOM
     <server description="main server config. Will be merged with /configDropins/**/">
         <featureManager>
             <feature>jakartaee-9.1</feature>
+            <feature>monitor-1.0</feature>
+            <feature>mpMetrics-4.0</feature>
         </featureManager>
 
         <!-- Automatically expand WAR files and EAR files -->
@@ -176,6 +179,9 @@ EOM
                 logFormat='%h %u %{t}W "%r" %s %b %D' >
             </accessLogging>
         </httpEndpoint>
+
+        <!-- Disable security for metrics -->
+        <mpMetrics authentication="false"/>
     </server>
 EOM
 
@@ -263,6 +269,9 @@ elif [[ "${ACTION}" =~ ^run|^status$ ]]; then
     WLP_SERVER_DIR=$WLP_USER_DIR/servers/$WLP_SERVER_NAME
     $WLP_SERVER_CMD $ACTION $WLP_SERVER_NAME
 
+elif [[ "${ACTION}" == "systemd" ]]; then
+    WLP_SERVER_NAME=${2?ERROR: Arg1: Kein SERVERNAME angegeben.}
+    createSystemdService "${WLP_SERVER_NAME}"
 
 elif [[ "${ACTION}" = "status-all" ]]; then
     servers=$($WLP_SERVER_CMD list | sed -ne '/^The following servers are defined/,$p' | tail -n+3)
