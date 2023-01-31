@@ -237,7 +237,7 @@ function deployersWriteAccess {
         chown "${WLP_BIN_USER}":"${WLP_DEPLOY_GROUP}" ${__serverDir}
         setWriteAccessForDeployersGroup "${__serverDir}/apps"
         setWriteAccessForDeployersGroup "${__serverDir}/dropins"
-        setWriteAccessForDeployersGroup "${__serverDir}/configDropins/defaults"
+        ##### Meeting 20230130: setWriteAccessForDeployersGroup "${__serverDir}/configDropins/defaults"
     done
 }
 
