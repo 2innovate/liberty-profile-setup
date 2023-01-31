@@ -5,10 +5,10 @@ export WLP_VERSION=22.0.0.12
 export WLP_EDITION=wlp-base-all
 export WLP_JDK_VERSION=jdk-17.0.5+8
 
-export WLP_BIN_ROOT=/opt/liberty
-export WLP_LOG_ROOT=/opt/liberty/logs
-export WLP_PROFILE_ROOT=/opt/liberty/profiles
-export WLP_JAVA_ROOT=/opt/liberty/java
+export WLP_BIN_ROOT=/app/IBM/liberty
+export WLP_LOG_ROOT=/app/IBM/logs
+export WLP_PROFILE_ROOT=/app/IBM/liberty/profiles
+export WLP_JAVA_ROOT=/app/IBM/java
 
 export WLP_BIN_USER=${LIBERTY_BIN_USER:=liberty}
 export WLP_BIN_USER_UID=4242
