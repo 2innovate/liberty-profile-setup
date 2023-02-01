@@ -11,7 +11,7 @@ test -z "${WLP_SERVER_NAME}"        && {
 
 
 WLP_SERVER_DIR=${WLP_USER_DIR}/servers/${WLP_SERVER_NAME}
-mkdir -p ${WLP_USER_DIR}/shared/resources/adapters/jdbc/oracle
+mkdir -p ${WLP_USER_DIR}/shared/resources/jdbc/oracle
 
 # CONFIGURATION OVERRIDE file JAAS Authentication data
 cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/jaas_authdata.xml
@@ -32,10 +32,10 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/oracle-driver.xml
 <server description="Oracle JDBC driver">
 
     <library id="oracle7Lib" name="oracle7Lib" description="Shared library for Oracle 7 JDBC driver">
-        <fileset dir="${shared.resource.dir}/adapters/jdbc/oracle" includes="ojdbc7.jar xdb6.jar"></fileset>
+        <fileset dir="${shared.resource.dir}/jdbc/oracle" includes="ojdbc7.jar xdb6.jar"></fileset>
     </library>
     <library id="oracle8Lib" name="oracle8Lib" description="Shared library for Oracle 8 JDBC driver">
-        <fileset dir="${shared.resource.dir}/adapters/jdbc/oracle" includes="ojdbc8.jar"></fileset>
+        <fileset dir="${shared.resource.dir}/jdbc/oracle" includes="ojdbc8.jar"></fileset>
     </library>
 
     <jdbcDriver libraryRef="oracle8Lib" id="oracle8XADriver" type="oracle.jdbc.xa.client.OracleXADataSource">
