@@ -193,12 +193,12 @@ EOM
         </featureManager>
 
         <keyStore id="defaultKeyStore"
-            location="${shared.resource.dir}/security/${wlp.server.name}.p12"
+            location="${shared.resource.dir}/security/${wlp.server.name}-key.p12"
             type="PKCS12"
             password="${wlp.keystore.pass}" />
 
         <keyStore id="defaultTrustStore"
-            location="${shared.resource.dir}/security/${wlp.server.name}.p12"
+            location="${shared.resource.dir}/security/${wlp.server.name}-trust.p12"
             type="PKCS12"
             password="${wlp.keystore.pass}" />
 
@@ -243,9 +243,13 @@ EOM
     # Keystores
     #
     # Generate self signed TLS certificate & key in P12 keytstore
-    ${JAVA_HOME}/bin/keytool -genkeypair  -keyalg RSA -keysize 4096 -sigalg SHA256withRSA  -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12" -dname "CN=${WLP_SERVER_NAME}-$(hostname)" -validity 3650 -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
-
-    ${JAVA_HOME}/bin/keytool -exportcert -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12" -file "/tmp/${WLP_SERVER_NAME}.cer" -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
+    ${JAVA_HOME}/bin/keytool -genkeypair  -keyalg RSA -keysize 4096 -sigalg SHA256withRSA  -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-key.p12" -dname "CN=${WLP_SERVER_NAME}-$(hostname)" -validity 3650 -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
+    #
+    # Export cert to be imported wherever needed
+    ${JAVA_HOME}/bin/keytool -exportcert -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-key.p12" -file "/tmp/${WLP_SERVER_NAME}.cer" -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
+    #
+    # Create server specific trust store and import own certificate
+    ${JAVA_HOME}/bin/keytool -importcert -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-trust.p12" -storepass ${WLP_KEYSTORE_PASS} -alias "${WLP_SERVER_NAME}" -file /tmp/hhue01.cer -storetype PKCS12  -noprompt
 
 
 elif [ "${ACTION}" = "delete" ]; then
@@ -260,7 +264,8 @@ elif [ "${ACTION}" = "delete" ]; then
         echo -e "\nPress any key to delete '$WLP_SERVER_DIR' now, or Ctrl-C to abort ..."
         read key
     fi
-    rm -rf "${WLP_SERVER_DIR}" "${WLP_OUTPUT_DIR}/${WLP_SERVER_NAME}" "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}.p12"
+    rm -rf "${WLP_SERVER_DIR}" "${WLP_OUTPUT_DIR}/${WLP_SERVER_NAME}" "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-key.p12"
+    rm -rf "${WLP_SERVER_DIR}" "${WLP_OUTPUT_DIR}/${WLP_SERVER_NAME}" "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-trust.p12"
     echo -e "Server '${WLP_SERVER_DIR}' wurde gelöscht.\n"
 
 

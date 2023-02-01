@@ -323,7 +323,11 @@ function createPrereqs {
         rm -rf "${WLP_BIN_ROOT}"
     fi
     createDir "${WLP_BIN_ROOT}"
+    createDir "${WLP_JAVA_ROOT}"
+    createDir "${WLP_LOG_ROOT}"
     chown -R "${WLP_BIN_USER}":"${WLP_BIN_GROUP}" "${WLP_BIN_ROOT}"
+    chown -R "${WLP_BIN_USER}":"${WLP_BIN_GROUP}" "${WLP_JAVA_ROOT}"
+    chown -R "${WLP_BIN_USER}":"${WLP_BIN_GROUP}" "${WLP_LOG_ROOT}"
     ##
     ## Clone the git repo
     su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && git clone https://github.com/2innovate/liberty-profile-setup ." || {
@@ -332,13 +336,13 @@ function createPrereqs {
     }
     ##
     ## Download Liberty & Java
-    su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && mkdir -p java downloads && cd downloads && curl -LO ${JAVA_URL} && curl -LO ${LIBERTY_URL}" || {
+    su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && mkdir -p downloads && cd downloads && curl -LO ${JAVA_URL} && curl -LO ${LIBERTY_URL}" || {
         echo "ERROR: Failed to download binaries"
         exit 1
     }
     ##
     ## Unpack Java
-    su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT}/java && tar xvzf ../downloads/${JAVA_URL##*/}"
+    su - "${WLP_BIN_USER}" -c "cd ${WLP_JAVA_ROOT} && tar xvzf ${WLP_BIN_ROOT}/downloads/${JAVA_URL##*/}"
     ##
     ## Unpack Liberty
     __file=$(echo ${LIBERTY_URL##*/})

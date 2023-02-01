@@ -40,6 +40,11 @@ export WLP_PROFILE_NAME=wlp
 export WLP_USER_DIR=$WLP_PROFILE_ROOT/$WLP_PROFILE_NAME
 export WLP_OUTPUT_DIR=$WLP_LOG_ROOT/$WLP_PROFILE_NAME
 
+# Directories we need
+export TAI_RESOURCE_DIR=${WLP_USER_DIR}/shared/resources/libs/tai
+export ORACLE_DRIVER_DIR=${WLP_USER_DIR}/shared/resources/jdbc/oracle
+export DB2_DRIVER_DIR=${WLP_USER_DIR}/shared/resources/jdbc/db2
+
 # for AES encrypred secrets
 WLP_AES_KEY_FILE_NAME=aesKey.properties
 WLP_AES_KEY_FILE=${WLP_USER_DIR}/shared/resources/security/$WLP_AES_KEY_FILE_NAME
