@@ -249,7 +249,7 @@ EOM
     ${JAVA_HOME}/bin/keytool -exportcert -alias "${WLP_SERVER_NAME}" -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-key.p12" -file "/tmp/${WLP_SERVER_NAME}.cer" -storepass ${WLP_KEYSTORE_PASS} -storetype PKCS12
     #
     # Create server specific trust store and import own certificate
-    ${JAVA_HOME}/bin/keytool -importcert -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-trust.p12" -storepass ${WLP_KEYSTORE_PASS} -alias "${WLP_SERVER_NAME}" -file /tmp/hhue01.cer -storetype PKCS12  -noprompt
+    ${JAVA_HOME}/bin/keytool -importcert -keystore "${WLP_USER_DIR}/shared/resources/security/${WLP_SERVER_NAME}-trust.p12" -storepass ${WLP_KEYSTORE_PASS} -alias "${WLP_SERVER_NAME}" -file /tmp/${WLP_SERVER_NAME}.cer -storetype PKCS12  -noprompt
 
 
 elif [ "${ACTION}" = "delete" ]; then
