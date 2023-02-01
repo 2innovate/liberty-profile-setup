@@ -43,9 +43,8 @@ EOM
 
 # CONFIGURATION OVERRIDE Inlcude the federated repository
 cat << EOM > ${WLP_SERVER_DIR}/configDropins/overrides/ltpa.xml
-<server description="Ltpa sefinition">
-    <ltpa keysFileName="\${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}ALoerrEsXW40OpY2Cntrxb18WRvlh05856JdO2YmAsmI" expiration="120" />
-
+<server description="Ltpa definition">
+    <ltpa keysFileName="\${WLP_USER_DIR}/shared/resources/security/ltpa.keys" keysPassword="{aes}AATQAaT99osuR4dyWUovpdZR6+ZvKUInGVk94P1FDrci" expiration="120" />
 </server>
 EOM
 
