@@ -33,7 +33,7 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_prereqs.xml
 EOM
 
 # CONFIGURATION OVERRIDE file to define TAIs
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/tai_definitions.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_definitions.xml
 <server description="TAI settings">
     <trustAssociation id="customTai" initializeAtFirstRequest="false"
     	invokeForUnprotectedURI="false" failOverToAppAuthType="false"
