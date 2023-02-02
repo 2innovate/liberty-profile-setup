@@ -329,11 +329,15 @@ function createPrereqs {
     chown -R "${WLP_BIN_USER}":"${WLP_BIN_GROUP}" "${WLP_JAVA_ROOT}"
     chown -R "${WLP_BIN_USER}":"${WLP_BIN_GROUP}" "${WLP_LOG_ROOT}"
     ##
-    ## Clone the git repo
-    su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && git clone https://github.com/2innovate/liberty-profile-setup ." || {
-        echo "ERROR: Failed to Clone git repo"
-        exit 1
-    }
+    ## Clone the git repo unless SKIP_REPO_CLONING is set
+    set +u
+    if [[ -z "${SKIP_REPO_CLONING}" ]] ; then
+        su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && git clone https://github.com/2innovate/liberty-profile-setup ." || {
+            echo "ERROR: Failed to Clone git repo"
+            exit 1
+        }
+    fi
+    set -u
     ##
     ## Download Liberty & Java
     su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && mkdir -p downloads && cd downloads && curl -LO ${JAVA_URL} && curl -LO ${LIBERTY_URL}" || {
@@ -347,10 +351,27 @@ function createPrereqs {
     ## Unpack Liberty
     __file=$(echo ${LIBERTY_URL##*/})
     ##
-    ## Get version number
-    [[ ${__file} =~ "openliberty-"([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\..* ]]
-    __version=${BASH_REMATCH[1]}
-    su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && unzip -d wlp-base-all-${__version} downloads/${LIBERTY_URL##*/}"
+    ## Openliberty or wlp?
+    if [[ "${__file}" =~ ^openliberty-.*\.zip ]] ; then
+        echo "Processing \"openliberty\" package ..."
+        ##
+        ## Get version number if openliberty file
+        [[ ${__file} =~ "openliberty-"([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.zip ]]
+        __version=${BASH_REMATCH[1]}
+        su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && unzip -d wlp-base-all-${__version} downloads/${LIBERTY_URL##*/}"
+    else
+        if [[ "${__file}" =~ ^wlp-.*\.jar ]] ; then
+            echo "Processing \"wlp\" package ..."
+            ##
+            ## Get version number if openliberty file
+            [[ ${__file} =~ "wlp-".*-([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.jar ]]
+            __version=${BASH_REMATCH[1]}
+            su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && java -jar downloads/${LIBERTY_URL##*/} --acceptLicense --verbose  wlp-base-all-${__version}"
+        else
+            echo "ERROR: Unsupported liberty download package!"
+            exit 1
+        fi
+    fi
 }
 
 function hardenInstallation {
