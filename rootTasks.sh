@@ -331,7 +331,7 @@ function createPrereqs {
     ##
     ## Clone the git repo unless SKIP_REPO_CLONING is set
     set +u
-    if [[ -z "${SKIP_REPO_CLONING}" ]] ; then
+    if [[ ! -z "${CLONE_GIT_REPO}" ]] ; then
         su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && git clone https://github.com/2innovate/liberty-profile-setup ." || {
             echo "ERROR: Failed to Clone git repo"
             exit 1
