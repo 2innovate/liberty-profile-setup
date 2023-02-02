@@ -65,6 +65,8 @@ This commad of the `rootTasks.sh`  prepares a server by creating the required us
 
 If the directory exists the script prompts for deletion of the existing directory unless *-f* is set.
 
+**Note**: As part of the pre-req setup this repo is cloned as well the to *WLP_BIN_ROOT* directory. If the cloning does not work (for example due to network setup) this part can be skipped by setting the environment variable *SKIP_REPO_CLONING* to any non-empty value.
+
 ## Command `systemd`
 
 This command creates the required *systemd* files to install a service for the server named *NAME*

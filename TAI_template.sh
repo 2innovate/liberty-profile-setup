@@ -21,12 +21,12 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_prereqs.xml
     </featureManager>
 
     <library id="customTAILib" name="customTAILib" description="Shared library for custom TAI">
-        <fileset dir="${shared.resource.dir}/libs/tai" includes="zepta-tai-interceptor-1.0.4.jar zepta-tai-utils-1.0.4.jar"></fileset>
+        <fileset dir="${shared.resource.dir}/libs/tai" includes="zepta-tai-interceptor-1.0.4.jar zepta-tai-utils-1.0.4.jar bcprov-jdk15on-1.51.jar"></fileset>
     </library>
 
     <!-- Use pattern to load! (can upgrade only all at the same time :( ))
         <library id="customTAILib" name="customTAILib" description="Shared library for custom TAI">
-            <fileset dir="${shared.resource.dir}/libs/tai" includes="zepta-tai-*.jar"></fileset>
+            <fileset dir="${shared.resource.dir}/libs/tai" includes="zepta-tai-*.jar bcprov-jdk15on-1.51.jar"></fileset>
         </library>
     -->
 </server>
@@ -67,6 +67,7 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/tai_definitions.xml
                 pvaPrefix="SVA"
                 pvaPublicKey="${shared.resource.dir}/security/sva_test_public_key.pem">
             </properties>
+        </interceptors>
 
     	<interceptors
     		id="SVBTAI" className="at.sozvers.pva.infra.tai.SVBTAI"
