@@ -366,7 +366,7 @@ function createPrereqs {
             ## Get version number if openliberty file
             [[ ${__file} =~ "wlp-".*-([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\.jar ]]
             __version=${BASH_REMATCH[1]}
-            su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && java -jar downloads/${LIBERTY_URL##*/} --acceptLicense --verbose  wlp-base-all-${__version}"
+            su - "${WLP_BIN_USER}" -c "cd ${WLP_BIN_ROOT} && ${JAVA_HOME}/bin/java -jar downloads/${LIBERTY_URL##*/} --acceptLicense --verbose  wlp-base-all-${__version}"
         else
             echo "ERROR: Unsupported liberty download package!"
             exit 1
