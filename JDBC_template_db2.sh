@@ -15,7 +15,7 @@ mkdir -p ${WLP_USER_DIR}/shared/resources/jdbc/oracle
 mkdir -p ${WLP_USER_DIR}/shared/resources/jdbc/db2
 
 # CONFIGURATION OVERRIDE file JAAS Authentication data
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/db2DS.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/db2DS.xml
 <server description="JAAS Authentication data">
     <featureManager>
         <feature>jakartaee-9.1</feature>

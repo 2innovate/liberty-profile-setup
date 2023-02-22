@@ -14,21 +14,21 @@ WLP_SERVER_DIR=${WLP_USER_DIR}/servers/${WLP_SERVER_NAME}
 mkdir -p ${WLP_USER_DIR}/shared/resources/jdbc/oracle
 
 # CONFIGURATION OVERRIDE file JAAS Authentication data
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/jaas_authdata.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/jaas_authdata.xml
 <server description="JAAS Authentication data">
     <authData id="oracle8AuthData" user="oracleUser" password="{aes}AAd4cNsvnJWulvb7PS3f/vtF6fRByg4a5WRhL+o9QOi5"></authData>
 </server>
 EOM
 
 # CONFIGURATION OVERRIDE file Connection Manager data
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/connectionMananger.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/connectionMananger.xml
 <server description="Connection manager">
     <connectionManager id="oracle8CM" agedTimeout="2h" connectionTimeout="5s" minPoolSize="0" maxIdleTime="30m" maxPoolSize="50" purgePolicy="EntirePool" reapTime="5m"></connectionManager>
 </server>
 EOM
 
 # CONFIGURATION OVERRIDE file Oracle-8 JDBC Driver
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/oracle-driver.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/oracle-driver.xml
 <server description="Oracle JDBC driver">
 
     <library id="oracle7Lib" name="oracle7Lib" description="Shared library for Oracle 7 JDBC driver">
@@ -46,7 +46,7 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/oracle-driver.xml
 EOM
 
 # CONFIGURATION OVERRIDE file Oracle-8 JDBC Datasource
-cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/defaults/oracle-ds.xml
+cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/oracle-ds.xml
 <server description="Oracle JDBC Datasource">
     <featureManager>
         <feature>jdbc-4.2</feature>
