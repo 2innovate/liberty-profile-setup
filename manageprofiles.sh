@@ -223,7 +223,7 @@ EOM
             <feature>appSecurity-4.0</feature>
         </featureManager>
 
-        <basicRegistry id="basic">
+        <basicRegistry id="basic" realm="BasicRealm">
             <user name="admin" password="admin"/>
         </basicRegistry>
 
