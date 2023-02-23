@@ -229,6 +229,7 @@ EOM
 
         <administrator-role>
             <user>admin</user>
+            <group>app_was_entw_admin</group>
         </administrator-role>
 
         <remoteFileAccess>
