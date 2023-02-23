@@ -69,7 +69,7 @@ cat << EOM > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
         bindPassword="${LDAP_BIND_PWD_1}"
         ignoreCase="true" reuseConnection="true" recursiveSearch="true"
         searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
-        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
+        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig" ${LDAP_SSL_1}>
         <ldapCache>
             <attributesCache enabled="false" size="2000" timeout="20m" sizeLimit="2000"></attributesCache>
         </ldapCache>
@@ -109,7 +109,7 @@ cat << EOM > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
         bindPassword="${LDAP_BIND_PWD_2}"
         ignoreCase="true" reuseConnection="true" recursiveSearch="true"
         searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
-        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
+        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig" ${LDAP_SSL_2}>
         <ldapCache>
             <attributesCache enabled="false" size="2000" timeout="20m" sizeLimit="2000"></attributesCache>
         </ldapCache>
@@ -144,13 +144,13 @@ cat << EOM > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     </ldapRegistry>
 
     <ldapRegistry host="${LDAP_HOST_3}"
-        baseDN="dc=${LDAP_DOM3},dc=${LDAP_DNS_SUBDOMAIN_1},dc=at" port="10389" ldapType="Custom"
+        baseDN="dc=${LDAP_DOM3},dc=${LDAP_DNS_SUBDOMAIN_1},dc=at" port="${LDAP_PORT_3}" ldapType="Custom"
         id="OpenLDAP_${LDAP_DOM3^^}"
         bindDN="${LDAP_BIND_DN_3}"
         bindPassword="${LDAP_BIND_PWD_3}"
         ignoreCase="true" reuseConnection="true" recursiveSearch="true"
         searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
-        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
+        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig" ${LDAP_SSL_3}>
         <ldapCache>
             <attributesCache enabled="false" size="2000" timeout="20m" sizeLimit="2000"></attributesCache>
         </ldapCache>
@@ -185,13 +185,13 @@ cat << EOM > ${WLP_USER_DIR}/shared/config/federatedRepository.xml
     </ldapRegistry>
 
     <ldapRegistry host="${LDAP_HOST_4}"
-        baseDN="dc=${LDAP_DOM4},dc=${LDAP_DNS_SUBDOMAIN_1},dc=at" port="10389" ldapType="Custom"
+        baseDN="dc=${LDAP_DOM4},dc=${LDAP_DNS_SUBDOMAIN_1},dc=at" port="${LDAP_PORT_4}" ldapType="Custom"
         id="OpenLDAP_${LDAP_DOM4^^}"
         bindDN="${LDAP_BIND_DN_4}"
         bindPassword="${LDAP_BIND_PWD_4}"
         ignoreCase="true" reuseConnection="true" recursiveSearch="true"
         searchTimeout="15s" connectTimeout="5s" readTimeout="15s"
-        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig">
+        primaryServerQueryTimeInterval="15" returnToPrimaryServer="true" derefAliases="always" referral="ignore" sslRef="defaultSSLConfig" ${LDAP_SSL_4}>
         <ldapCache>
             <attributesCache enabled="false" size="2000" timeout="20m" sizeLimit="2000"></attributesCache>
         </ldapCache>
