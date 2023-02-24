@@ -43,9 +43,9 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_definitions.xml
     		id="PVAExternePartnerTAI" className="at.sozvers.pva.infra.tai.PVAExternePartnerTAI"
     		invokeAfterSSO="true" invokeBeforeSSO="false" libraryRef="customTAILib">
     		<properties
-                pvaLoginUrl="http://portalpva.pva.sozvers.at/pvalogin"
+                pvaLoginUrl="http://s01aewas.pva.sozvers.at/pvalogin"
                 pvaType="COOKIE"
-                pvaTaiDebug="false"
+                pvaTaiDebug="TRUE"
                 pvaExpireTime="60000"
                 pvaParam="USER"
                 pvaRegEx="^[0][2][0-9a-zA-Z]{6}$"
@@ -58,9 +58,9 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_definitions.xml
     		id="SVATAI" className="at.sozvers.pva.infra.tai.SVATAI"
     		invokeAfterSSO="true" invokeBeforeSSO="false" libraryRef="customTAILib">
     		<properties
-                pvaLoginUrl="http://svawebst.sva.sozvers.at/zepta/"
+                pvaLoginUrl="http://svawebft.sva.sozvers.at/zepta/"
                 pvaType="COOKIE"
-                pvaTaiDebug="false"
+                pvaTaiDebug="TRUE"
                 pvaExpireTime="60000"
                 pvaParam="USER"
                 pvaRegEx="^[4][0][0-9a-zA-Z]{2,8}$"
@@ -73,13 +73,13 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/tai_definitions.xml
     		id="SVBTAI" className="at.sozvers.pva.infra.tai.SVBTAI"
     		invokeAfterSSO="true" invokeBeforeSSO="false" libraryRef="customTAILib">
     		<properties
-                pvaLoginUrl="http://svbi.svb.sozvers.at/"
+                pvaLoginUrl="http://svbt.svb.sozvers.at/"
                 pvaType="COOKIE"
                 pvaTaiDebug="false"
                 pvaExpireTime="60000"
                 pvaParam="USER"
                 pvaRegEx="^[5][0][0-9a-zA-Z]{4}$"
-                pvaPrefix="SVA"
+                pvaPrefix="SVB"
                 pvaPublicKey="${shared.resource.dir}/security/svb_test_public_key.pem">
             </properties>
     	</interceptors>
