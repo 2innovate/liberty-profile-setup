@@ -53,7 +53,7 @@ cat << "EOM" > ${WLP_SERVER_DIR}/configDropins/overrides/oracle-ds.xml
     </featureManager>
 
     <dataSource id="oracle8DSSampleDB" jndiName="jdbc/exampleDS" jdbcDriverRef="oracle8XADriver" containerAuthDataRef="oracle8AuthData" statementCacheSize="10" connectionManagerRef="oracle8CM" recoveryAuthDataRef="oracle8AuthData" type="javax.sql.XADataSource" >
-        <properties  driverType="thin" databaseName="pvintern" serverName="localhost" portNumber="1521" URL="jdbc:oracle:thin:@localhost:1521:pvintern"></properties>
+        <properties  driverType="thin" databaseName="pvintern" serverName="localhost" portNumber="1521" URL="jdbc:oracle:thin:@localhost:1521:pvintern" user="oracleUser" password="{aes}AAd4cNsvnJWulvb7PS3f/vtF6fRByg4a5WRhL+o9QOi5"></properties>
     </dataSource>
 
 </server>
